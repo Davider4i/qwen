@@ -12,6 +12,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug - check if FTP_SERVER exists
+        run: |
+          if [ -n "${{ secrets.FTP_SERVER }}" ]; then
+            echo "FTP_SERVER exists"
+          else
+            echo "FTP_SERVER is EMPTY or NOT SET"
+          fi
+          if [ -n "${{ secrets.FTP_USERNAME }}" ]; then
+            echo "FTP_USERNAME exists"
+          else
+            echo "FTP_USERNAME is EMPTY or NOT SET"
+          fi
+          if [ -n "${{ secrets.FTP_PASSWORD }}" ]; then
+            echo "FTP_PASSWORD exists"
+          else
+            echo "FTP_PASSWORD is EMPTY or NOT SET"
+          fi
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.0.0
         with:
